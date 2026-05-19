@@ -21,3 +21,18 @@ node_modules
 
 # cli
 dist
+
+# Secrets and sensitive files
+.env
+.env.*
+*.key
+
+# Foundry broadcast (contains tx data with private details)
+packages/foundry/broadcast/
+
+# Foundry cache
+packages/foundry/cache/
+
+# bgipfs config
+packages/foundry/ipfs-upload.config.json
+ipfs-upload.config.json

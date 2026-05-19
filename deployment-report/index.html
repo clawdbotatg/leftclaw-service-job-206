@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VaultID Production Deployment Report</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #0f0f10; color: #e2e8f0; line-height: 1.6; padding: 2rem 1rem; }
+  .container { max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 2rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.5rem; }
+  h2 { font-size: 1.25rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin: 2.5rem 0 1rem; border-bottom: 1px solid #1e293b; padding-bottom: 0.5rem; }
+  h3 { font-size: 1rem; font-weight: 600; color: #e2e8f0; margin: 1.5rem 0 0.5rem; }
+  .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
+  .badge-green { background: #052e16; color: #4ade80; border: 1px solid #166534; }
+  .badge-blue { background: #0c1a2e; color: #60a5fa; border: 1px solid #1e3a5f; }
+  .badge-yellow { background: #1c1200; color: #fbbf24; border: 1px solid #92400e; }
+  .meta { color: #64748b; font-size: 0.875rem; margin-bottom: 2rem; }
+  .contract-card { background: #1a1a2e; border: 1px solid #2d2d3d; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+  .contract-name { font-weight: 700; font-size: 1.1rem; color: #f8fafc; margin-bottom: 0.5rem; }
+  .addr { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.875rem; color: #60a5fa; word-break: break-all; }
+  .links { display: flex; gap: 0.75rem; margin-top: 0.75rem; flex-wrap: wrap; }
+  a { color: #60a5fa; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .link-btn { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.35rem 0.875rem; background: #1e3a5f; border: 1px solid #2563eb; border-radius: 6px; font-size: 0.8rem; color: #93c5fd; }
+  .link-btn:hover { background: #1d4ed8; text-decoration: none; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.875rem; }
+  th { text-align: left; padding: 0.625rem 0.875rem; background: #12121f; color: #94a3b8; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  td { padding: 0.625rem 0.875rem; border-top: 1px solid #1e293b; vertical-align: top; }
+  tr:hover td { background: #1a1a2e; }
+  .finding { background: #12121f; border: 1px solid #2d2d3d; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 0.875rem; }
+  .finding-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+  .finding-title { font-weight: 600; color: #f1f5f9; }
+  .finding-desc { color: #94a3b8; font-size: 0.875rem; }
+  .code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 0.8rem; background: #0d0d1a; border: 1px solid #2d2d3d; border-radius: 6px; padding: 0.875rem 1rem; overflow-x: auto; color: #e2e8f0; margin: 0.75rem 0; white-space: pre; }
+  .alert { background: #1c1200; border: 1px solid #92400e; border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; }
+  .alert-title { color: #fbbf24; font-weight: 600; font-size: 0.875rem; margin-bottom: 0.25rem; }
+  .alert-body { color: #d97706; font-size: 0.875rem; }
+  .stat { display: inline-flex; flex-direction: column; align-items: center; background: #1a1a2e; border: 1px solid #2d2d3d; border-radius: 8px; padding: 0.875rem 1.5rem; margin-right: 0.75rem; margin-bottom: 0.75rem; }
+  .stat-val { font-size: 2rem; font-weight: 700; color: #4ade80; }
+  .stat-label { font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+  ul { list-style: disc; padding-left: 1.5rem; }
+  li { margin: 0.25rem 0; font-size: 0.875rem; color: #94a3b8; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>VaultID Production Deployment</h1>
+  <p class="meta">Deployed May 19, 2026 &bull; Base Mainnet (Chain ID 8453) &bull; LeftClaw Job #206</p>
+
+  <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-bottom: 1.5rem;">
+    <span class="badge badge-green">✓ 3 Contracts Deployed</span>
+    <span class="badge badge-green">✓ All Verified on Basescan</span>
+    <span class="badge badge-green">✓ 37/37 Tests Pass</span>
+    <span class="badge badge-yellow">⚡ Pending: acceptOwnership()</span>
+  </div>
+
+  <h2>Contract Addresses</h2>
+
+  <div class="contract-card">
+    <div class="contract-name">VaultID <span style="font-weight:400; color:#64748b; font-size:0.875rem;">(ERC-721 Soulbound)</span></div>
+    <div class="addr">0xcD6f94479De82dc8237CFD2192639cd7A6F086e4</div>
+    <div class="links">
+      <a class="link-btn" href="https://basescan.org/address/0xcd6f94479de82dc8237cfd2192639cd7a6f086e4#code" target="_blank">Basescan ↗</a>
+      <a class="link-btn" href="https://github.com/clawdbotatg/leftclaw-service-job-206/blob/main/packages/foundry/contracts/VaultID.sol" target="_blank">Source ↗</a>
+    </div>
+  </div>
+
+  <div class="contract-card">
+    <div class="contract-name">VaultIDRegistry <span style="font-weight:400; color:#64748b; font-size:0.875rem;">(Issuer Profiles &amp; Subscriptions)</span></div>
+    <div class="addr">0x83c43535674C79925908dc6E67eB88B2af1E786e</div>
+    <div class="links">
+      <a class="link-btn" href="https://basescan.org/address/0x83c43535674c79925908dc6e67eb88b2af1e786e#code" target="_blank">Basescan ↗</a>
+      <a class="link-btn" href="https://github.com/clawdbotatg/leftclaw-service-job-206/blob/main/packages/foundry/contracts/VaultIDRegistry.sol" target="_blank">Source ↗</a>
+    </div>
+  </div>
+
+  <div class="contract-card">
+    <div class="contract-name">VaultIDMarketplace <span style="font-weight:400; color:#64748b; font-size:0.875rem;">(Issuer Storefront)</span></div>
+    <div class="addr">0x461b29660aa4E48bC9d10f7c2BF0280B0FC1E28b</div>
+    <div class="links">
+      <a class="link-btn" href="https://basescan.org/address/0x461b29660aa4e48bc9d10f7c2bf0280b0fc1e28b#code" target="_blank">Basescan ↗</a>
+      <a class="link-btn" href="https://github.com/clawdbotatg/leftclaw-service-job-206/blob/main/packages/foundry/contracts/VaultIDMarketplace.sol" target="_blank">Source ↗</a>
+    </div>
+  </div>
+
+  <div class="alert">
+    <div class="alert-title">⚡ Action Required — Accept Ownership</div>
+    <div class="alert-body">All three contracts are pending ownership transfer. Call <code>acceptOwnership()</code> on each from wallet <strong>0xFE968dE21eb0E77d5877477C31a04A3075c0086E</strong>.</div>
+  </div>
+
+  <h2>Configuration</h2>
+  <table>
+    <tr><th>Parameter</th><th>Value</th></tr>
+    <tr><td>Fee Recipient</td><td class="addr">0xFE968dE21eb0E77d5877477C31a04A3075c0086E</td></tr>
+    <tr><td>USDC Address</td><td class="addr">0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913</td></tr>
+    <tr><td>ETH Mint Price</td><td>0.001 ETH</td></tr>
+    <tr><td>USDC Mint Price</td><td>5 USDC</td></tr>
+    <tr><td>Basic Subscription</td><td>10 USDC / 30 days</td></tr>
+    <tr><td>Issuer Subscription</td><td>50 USDC / 30 days</td></tr>
+    <tr><td>Basic Mint Quota</td><td>5 per period</td></tr>
+    <tr><td>Marketplace Fee</td><td>2.5% (250 bps)</td></tr>
+    <tr><td>CLAWD Address</td><td>Not configured (address(0))</td></tr>
+  </table>
+
+  <h2>Audit Findings Fixed</h2>
+
+  <div class="finding">
+    <div class="finding-header"><span class="badge badge-blue">HIGH 1</span><span class="finding-title">Issuer Revocation Bypass — FIXED</span></div>
+    <div class="finding-desc">Three independent flags: <code>revokedByOwner</code>, <code>revokedByIssuer</code>, <code>revokedByAdmin</code>. Each actor can only clear their own flag. No actor can override another's revocation.</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-header"><span class="badge badge-blue">HIGH 2</span><span class="finding-title">Admin Revocation Bypass via Recovery — FIXED</span></div>
+    <div class="finding-desc"><code>recoverVault()</code> and <code>setRecoveryWallet()</code> both check <code>isRevoked()</code> and revert if any revocation flag is active. Recovery cannot launder a revoked credential.</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-header"><span class="badge badge-blue">HIGH 3</span><span class="finding-title">Deactivated Issuer Self-Reactivation — FIXED</span></div>
+    <div class="finding-desc"><code>registerOrUpdateIssuerProfile()</code> only sets <code>active = true</code> on first registration. Updates never touch the active flag. Only owner can reactivate via <code>reactivateIssuer()</code>.</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-header"><span class="badge badge-green">MED 1</span><span class="finding-title">Instant Registry Swap — FIXED</span></div>
+    <div class="finding-desc">2-step update: <code>proposeRegistry()</code> + <code>applyRegistryProposal()</code> with 48-hour delay. Initial setup bypasses delay only when <code>registry == address(0)</code>. Cancellation supported.</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-header"><span class="badge badge-green">MED 2</span><span class="finding-title">Lapsed Issuer Admin Rights — IMPLEMENTED</span></div>
+    <div class="finding-desc">Lapsed subscription ≠ deactivated. <code>issuerAdminRights(issuer)</code> returns true if profile is active, regardless of subscription. Only admin deactivation removes rights. New minting requires active subscription.</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-header"><span class="badge badge-green">LOW 1</span><span class="finding-title">extendExpiry Reactivates Revoked Membership — FIXED</span></div>
+    <div class="finding-desc"><code>membership.active</code> is always derived in the getter. Never stored as a static boolean. Automatically false if credential is revoked, burned, or membershipExpiry has passed.</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-header"><span class="badge badge-green">LOW 2</span><span class="finding-title">USDC Blocklist DoS — ADDRESSED</span></div>
+    <div class="finding-desc"><code>setFeeRecipient()</code> is owner-updateable. SafeERC20 used throughout. Documented in contract comments.</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-header"><span class="badge badge-green">LOW 3</span><span class="finding-title">Unchecked Mint Counter Wrap — FIXED</span></div>
+    <div class="finding-desc"><code>setBasicMintQuota()</code> requires <code>quota &lt; type(uint32).max</code>. Constructor validates this. Counter explicitly checked before increment.</div>
+  </div>
+
+  <div class="finding">
+    <div class="finding-header"><span class="badge badge-green">INFO 2</span><span class="finding-title">vaultContract Unset at Deployment — FIXED</span></div>
+    <div class="finding-desc">Deployment script links registry and vault atomically before transferring ownership. Both <code>registry.vaultContract</code> and <code>vaultId.registry</code> are set in the same deployment transaction.</div>
+  </div>
+
+  <h2>Test Results</h2>
+
+  <div style="margin: 1rem 0 1.5rem;">
+    <div class="stat"><span class="stat-val">37</span><span class="stat-label">Tests Passed</span></div>
+    <div class="stat"><span class="stat-val">0</span><span class="stat-label">Failed</span></div>
+    <div class="stat"><span class="stat-val">32</span><span class="stat-label">Spec Tests</span></div>
+  </div>
+
+  <h2>Frontend Integration</h2>
+  <h3>Changed Function Names</h3>
+  <table>
+    <tr><th>Area</th><th>Beta (VaultIDV4)</th><th>Production</th></tr>
+    <tr><td>Revoke by owner</td><td><code>revoke(id)</code></td><td><code>revoke(id)</code> (same)</td></tr>
+    <tr><td>Revoke by issuer</td><td><code>revoke(id)</code> (shared)</td><td><code>revokeByIssuer(id)</code></td></tr>
+    <tr><td>Revoke by admin</td><td><code>revoke(id)</code> (shared)</td><td><code>revokeByAdmin(id)</code></td></tr>
+    <tr><td>Unrevoke by owner</td><td><code>unrevoke(id)</code></td><td><code>unrevoke(id)</code></td></tr>
+    <tr><td>Unrevoke by issuer</td><td>N/A</td><td><code>unrevokeByIssuer(id)</code></td></tr>
+    <tr><td>Unrevoke by admin</td><td>N/A</td><td><code>unrevokeByAdmin(id)</code></td></tr>
+    <tr><td>Check validity</td><td><code>revoked</code> bool</td><td><code>isRevoked(id)</code>, <code>isValid(id)</code>, <code>revocationStatus(id)</code></td></tr>
+    <tr><td>Recovery wallet</td><td><code>setBackupWallet()</code></td><td><code>setRecoveryWallet()</code></td></tr>
+    <tr><td>Registry update</td><td>Instant owner call</td><td><code>proposeRegistry()</code> + 48h + <code>applyRegistryProposal()</code></td></tr>
+  </table>
+
+  <h3>Old Beta Contract Treatment</h3>
+  <ul>
+    <li>VaultIDV4 (0x491684...394C9C) — historical, read-only. No new mints.</li>
+    <li>VaultIDRegistry beta (0x917080...fA225) — historical, read-only.</li>
+    <li>VaultIDMarketplace beta (0x77974E...ba2Ea) — historical, read-only.</li>
+    <li>Frontend can display beta vaults as "legacy" with a notice to use new production contracts.</li>
+  </ul>
+
+  <h2>Repository</h2>
+  <p style="margin: 0.75rem 0;">
+    <a class="link-btn" href="https://github.com/clawdbotatg/leftclaw-service-job-206" target="_blank">GitHub: clawdbotatg/leftclaw-service-job-206 ↗</a>
+  </p>
+
+  <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #1e293b; color: #475569; font-size: 0.75rem;">
+    Delivered by clawdbotatg via LeftClaw Services · Job #206 · May 19, 2026
+  </div>
+</div>
+</body>
+</html>
